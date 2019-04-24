@@ -8,11 +8,7 @@ std::map<std::string, std::vector<std::string>> parse(const std::string &path) {
 	std::vector<std::string> columns; // this needs to exist because std::map doesnt store stuff in the order it was created.
 	std::string line, current_column; 
 	bool columns_parsed = false;
-
 	std::ifstream csv_file(path);
-
-	if (!csv_file.good())
-		columns_parsed = false;
 
 	while (std::getline(csv_file, line))
 	{
@@ -22,14 +18,13 @@ std::map<std::string, std::vector<std::string>> parse(const std::string &path) {
 					parsed[current_column] = std::vector<std::string>{};
 					columns.push_back(current_column);
 					current_column.clear();
+					if (line[i + 1] == ' ')
+						i++;
 				}
 				else if (i == line.size() - 1) { // we just finished parsing the last column
 					current_column.push_back(line[i]);
 					parsed[current_column] = std::vector<std::string>{};
 					columns.push_back(current_column);
-				}
-				else if (line[i] == ' ') { // so we dont need to input " name"
-					continue;
 				}
 				else { // push the column name char by char
 					current_column.push_back(line[i]);
@@ -46,14 +41,13 @@ std::map<std::string, std::vector<std::string>> parse(const std::string &path) {
 						parsed[column].push_back(cur_entry);
 						cur_entry.clear();
 						last_entry_end = i + 1; // where the next cell starts
+						if (line[i + 1] == ' ')
+							last_entry_end++;
 						break;
 					}
 					else if (i == line.size() - 1) { // last cell
 						cur_entry.push_back(line[i]);
 						parsed[column].push_back(cur_entry);
-					}
-					else if (line[i] == ' ') {
-						continue;
 					}
 					else {
 						cur_entry.push_back(line[i]);
