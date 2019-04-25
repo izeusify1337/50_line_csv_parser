@@ -56,5 +56,6 @@ std::map<std::string, std::vector<std::string>> parse(const std::string &path) {
 			}
 		}
 	}
+	
 	return parsed;
 }
