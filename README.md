@@ -1,1 +1,1 @@
-so i wrote a 50 line csv parser because the ones on here are like 2k lines and i didnt want to bloat my project. it is probably not as fast, im not sure i havent read them but this works fine and its fast ish. 
+so i wrote a 50 line csv parser because the ones on here are like 2k lines and i didnt want to bloat my project. it is probably not as fast, im not sure i havent read them but this works fine and its fast ish
